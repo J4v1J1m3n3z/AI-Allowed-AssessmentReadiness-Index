@@ -1,4 +1,4 @@
-### AI-Allowed AssessmentReadiness Index
+### **AI-Allowed AssessmentReadiness Index**
 Author: Javier Jimenez
 ## AI-Allowed AssessmentReadiness Index 
 Author: Javier Jimenez
