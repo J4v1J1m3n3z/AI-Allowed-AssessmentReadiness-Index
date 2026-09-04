@@ -1,5 +1,5 @@
 ### **AI-Allowed AssessmentReadiness Index**
-Author: Javier Jimenez
+*Author: Javier Jimenez*
 ## AI-Allowed AssessmentReadiness Index 
 Author: Javier Jimenez
 Email: javierji@buffalo.edu
