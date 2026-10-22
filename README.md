@@ -61,14 +61,15 @@ A resource is included if it is published by the state agency or its official te
   * `Contains_Scoring_Criteria`: does it give rubric or scoring criteria for written responses?
 
   Each takes Y / N / Unknown.
-* 📝 **Item_Text_Coverage** (None / Partial / Full / Unknown) records how much item content the resource reproduces *as students see it*. Explanations or paraphrases of an item don't count, even if they quote a phrase. Partial means some items are reproduced in full and others not at all, and the notes say which.
+* 📝 **Item_Text_Coverage** (None / Partial / Full / Unknown) records how much item content the resource reproduces *as students see it*. Explanations or paraphrases of an item don't count, even if they quote a phrase. Partial means some items are reproduced in full and others not at all, and the **Notes** say which.
 * 📋 **Resource_Type**, **Subject**, **Access_Format**, **Technical_Barrier_Type** and **QA_Status** use dropdowns. The allowed values are listed in the Data_Dictionary (there is no separate Controlled_Vocabularies tab as of v0.3). Rubric (generic scoring criteria) and Scoring Guide (one administration's scored sample responses) are separate types.
-* ✍️ Titles are copied exactly as printed. Dates use `YYYY-MM-DD`.
+* ✍️ Titles are copied exactly as printed.
+* 📝 **Retrieval_Date** Date resources were input into Record_Keeper. Formatted as `YYYY-DD-MM`. 
 
 ### Resources that cover several grades or years
 They get **one row**, never duplicates.
 * **Grade_Scope** is text: a single grade (`3`), a hyphenated range (`3-5`), or `N/A` for course-based tests. Course-based tests also fill **Course** (e.g. `Algebra I`).
-* **Test_Year_Scope** is `YYYY` for a resource made for one administration, `YYYY-YYYY` or `YYYY-present` for one that stays in effect (the rubrics and blueprints are `2022-present`), or `Unknown`. A value ending in `present` should be read together with **Retrieval_Date**.
+* **Test_Year_Scope** is `YYYY` for a resource made for one administration, `YYYY-YYYY` or `YYYY-present` for one that stays in effect (the rubrics and blueprints are `2022-2023`), or `Unknown`. A value ending in `present` should be read together with **Retrieval_Date**.
 * To filter by grade or year in code, split the range on the hyphen.
 
 ### Recording uncertainty
