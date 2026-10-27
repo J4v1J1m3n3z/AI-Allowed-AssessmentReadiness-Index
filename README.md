@@ -53,10 +53,10 @@ A resource is included if it is published by the state agency or its official te
 ### Field conventions
 * 🔑 **Resource_ID** is our own ID (`TX-0001`, `TX-0002` ...), assigned once and never reused. Any ID the agency or platform assigns (e.g. Cambium's `testId`) goes in **Source_Assigned_ID**.
 * 📦 **Content fields** describe what is *inside this resource*, never what exists elsewhere for the same test:
-  * `Contains_Correct_Answer_Info`: does it state correct answers?
-  * `Contains_Item_Rationale`: does it explain why answers are right or wrong?
-  * `Contains_Standards_Reference`: does it name the TEKS standard for individual items? (Standards listed only by reporting category, as in blueprints, count as N.)
-  * `Contains_Scoring_Criteria`: does it give rubric or scoring criteria for written responses?
+  * `Contains_Correct_Answer_Info`: Does it state correct answers?
+  * `Contains_Item_Rationale`: Does it explain why answers are right or wrong?
+  * `Contains_Standards_Reference`: Does this resource identify the assessed standard for individual questions? Standards listed only for the test or a reporting category do not count.
+  * `Contains_Scoring_Criteria`: Does it give rubric or scoring criteria for written responses?
 
   Each takes Y / N / Unknown.
 * 📝 **Item_Text_Coverage** (None / Partial / Full / Unknown) records how much item content the resource reproduces *as students see it*. Explanations or paraphrases of an item don't count, even if they quote a phrase. Partial means some items are reproduced in full and others not at all, and the **Notes** say which.
@@ -131,7 +131,6 @@ From the 100-hour fall work plan (see the onboarding packet for full detail):
 | 7️⃣ Documentation & handoff | 5 | Make the work reproducible for another researcher/developer | README, setup notes, issues, next steps |
 
 ## 🕘 Version history
-
 * **v0.3 (Oct 2026):**
   * Resource_ID cleanup and new Source_Assigned_ID
   * Revised content fields and new Item_Text_Coverage
@@ -141,6 +140,7 @@ From the 100-hour fall work plan (see the onboarding packet for full detail):
   * QA of the three pilot contexts
 
   Details are in the Update_Notes tab.
+*  **v0.4**: Aligned README and dictionary definitions for item coverage, standards references, and retrieval dates. Corrected README statements about QA status and the Algebra I count. Resource-level QA statuses remain unchanged.
 * **v0.2:** First pilot entries for Grade 3 RLA, Grade 3 Math and Algebra I.
 * **Earlier:** Separate `Record_Keeper.csv` + `Data_Dictionary.xlsx`, now retired and merged into one workbook.
 
