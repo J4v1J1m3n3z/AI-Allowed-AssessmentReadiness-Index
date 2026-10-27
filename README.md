@@ -4,8 +4,8 @@
 **Email:** javierji@buffalo.edu
 **Research lead:** Sam Abramovich, University at Buffalo
 **Date created:** August 2026
-**Last updated:** October 2026 (resource inventory v0.3)
-**Status:** 🚧 Phase 2 — Data reconnaissance (Texas STAAR pilot). Resource inventory v0.3 complete; 4 of 15 pilot records still open (see [Quality assurance](#-quality-assurance)).
+**Last updated:** October 2026 (A3I_Record_Keeper_ver0.4)
+**Status:** 🚧 Phase 2 — Data reconnaissance (Texas STAAR pilot). A3I_Record_Keeper_ver0.4 complete; 4 of 15 pilot records still open (see [Quality assurance](#-quality-assurance)).
 
 ## 📝 Description
 
@@ -33,6 +33,7 @@ _Screenshots / dashboard preview to be added once the pilot dataset is ready._
 
 | File | What it is |
 |---|---|
+| 📗 `A3I_Record_Keeper_ver0.4.xlsx` | The current resource inventory for released Texas STAAR materials. Tabs: **Record_Keeper** (the inventory), **Data_Dictionary** (every field's definition and allowed values), **Instructions** (entry rules), **Update_Notes** (change log and old-to-new ID map). |
 | 📗 `A3I_Record_Keeper_ver0.3.xlsx` | The current resource inventory for released Texas STAAR materials. Tabs: **Record_Keeper** (the inventory), **Data_Dictionary** (every field's definition and allowed values), **Instructions** (entry rules), **Update_Notes** (change log and old-to-new ID map). |
 | 📗 `A3I_Record_Keeper_ver0.2.xlsx` | Previous version, kept unchanged for reference. |
 | 🧩 `Things_that_didnt_fit_v0.3.docx` | Cases the inventory structure had trouble representing during the pilot, and what we propose to do about each one. |
@@ -62,9 +63,9 @@ A resource is included if it is published by the state agency or its official te
 
   Each takes Y / N / Unknown.
 * 📝 **Item_Text_Coverage** (None / Partial / Full / Unknown) records how much item content the resource reproduces *as students see it*. Explanations or paraphrases of an item don't count, even if they quote a phrase. Partial means some items are reproduced in full and others not at all, and the **Notes** say which.
-* 📋 **Resource_Type**, **Subject**, **Access_Format**, **Technical_Barrier_Type** and **QA_Status** use dropdowns. The allowed values are listed in the Data_Dictionary (there is no separate Controlled_Vocabularies tab as of v0.3). Rubric (generic scoring criteria) and Scoring Guide (one administration's scored sample responses) are separate types.
+* 📋 **Resource_Type**, **Subject**, **Access_Format**, **Technical_Barrier_Type** and **QA_Status** use dropdowns. The allowed values are listed in the Data_Dictionary (there is no separate Controlled_Vocabularies tab as of v0.4). Rubric (generic scoring criteria) and Scoring Guide (one administration's scored sample responses) are separate types.
 * ✍️ Titles are copied exactly as printed.
-* 📝 **Retrieval_Date** Date resources were input into Record_Keeper. Formatted as `YYYY-DD-MM`. 
+* 📝 **Retrieval_Date** Retrieval_Date is the date the resource was last opened and confirmed at its URL, written as `YYYY-MM-DD`. 
 
 ### Resources that cover several grades or years
 They get **one row**, never duplicates.
@@ -75,13 +76,15 @@ They get **one row**, never duplicates.
 ### Recording uncertainty
 Values are never guessed. When something can't be confirmed from the source, the field is set to `Unknown` (or left blank where there is no Unknown option), and **Notes_Unresolved_Questions** explains why. **Technical_Barrier_Type** must agree with the notes. Problems with the structure itself go in *Things That Did Not Fit*.
 
-### ✅ Quality assurance
+### ✅ Claude-assisted Quality assurance
 Every row has a **QA_Status**:
 * **Not Reviewed**: entered, but not yet checked against the source.
 * **Reviewed**: the source was reopened and every field was checked against it.
 * **Needs Resolution**: a problem was found that needs discussion. It is described in the notes.
 
-Current pilot status: **11 Reviewed**, **1 Needs Resolution** (Algebra I rationales: 49 items vs. 50 in the answer key, and an unexplained "updated" file), **3 Not Reviewed** (the online practice tests, which still need checking in a browser). The 2026-10-04 QA pass was done with help from Claude, an AI assistant, reading each PDF (see Update_Notes).
+Claude-assisted QA statement: An earlier README described a Claude-assisted QA pass, but the current workbook does not document its scope or results.
+
+Current pilot status: All 15 resources remain marked **Not Reviewed** for full resource-level QA. Javier reports completing URL checks, spelling checks, and revisions to field definitions. **These checks do not establish that every resource field has been verified against its source.**
 
 ## 🔗 How this connects to item acquisition
 The inventory is the map for Phases 3–4. It shows which resource supplies which piece of an item (prompt, options, figures, correct answer, points, standard, rationale, scoring) and which pieces exist only in the online test.
@@ -104,13 +107,13 @@ The project is still in the data-reconnaissance phase (no extraction/acquisition
 
 1. 📥 Clone the repository.
 2. 📂 Navigate to the project directory.
-3. 📖 Open `A3I_Javier_Onboarding_Packet_Draft_v1_1.docx` first for project context, then `A3I_Record_Keeper_ver0.3.xlsx` for the current source inventory.
+3. 📖 Open `A3I_Javier_Onboarding_Packet_Draft_v1_1.docx` first for project context, then `A3I_Record_Keeper_ver0.4.xlsx` for the current source inventory.
 
 A `requirements.txt` and environment setup steps will be added here once the acquisition pipeline (Phase 3) begins.
 
 ## 📖 Usage
 
-* ✅ Log every official STAAR resource you find in `A3I_Record_Keeper_ver0.3.xlsx`, one row per resource, following the rules on the **Instructions** tab and the definitions on the **Data_Dictionary** tab.
+* ✅ Log every official STAAR resource you find in `A3I_Record_Keeper_ver0.4.xlsx`, one row per resource, following the rules on the **Instructions** tab and the definitions on the **Data_Dictionary** tab.
 * 🔢 Give each new row the next unused `TX-####` ID and set QA_Status to **Not Reviewed** until it has been checked against the source.
 * ❓ Don't guess: use `Unknown` and explain in `Notes_Unresolved_Questions`, per the onboarding packet's provenance and "do not invent missing metadata" rules.
 * 🧩 If something doesn't fit the structure, log it in *Things That Did Not Fit*.
