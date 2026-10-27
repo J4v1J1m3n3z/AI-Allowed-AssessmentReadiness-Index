@@ -35,13 +35,10 @@ _Screenshots / dashboard preview to be added once the pilot dataset is ready._
 |---|---|
 | 📗 `A3I_Record_Keeper_ver0.4.xlsx` | The current resource inventory for released Texas STAAR materials. Tabs: **Record_Keeper** (the inventory), **Data_Dictionary** (every field's definition and allowed values), **Instructions** (entry rules), **Update_Notes** (change log and old-to-new ID map). |
 | 📗 `A3I_Record_Keeper_ver0.3.xlsx` | The current resource inventory for released Texas STAAR materials. Tabs: **Record_Keeper** (the inventory), **Data_Dictionary** (every field's definition and allowed values), **Instructions** (entry rules), **Update_Notes** (change log and old-to-new ID map). |
-| 📗 `A3I_Record_Keeper_ver0.2.xlsx` | Previous version, kept unchanged for reference. |
-| 🧩 `Things_that_didnt_fit_v0.3.docx` | Cases the inventory structure had trouble representing during the pilot, and what we propose to do about each one. |
-| 🔍 `Item_Source_Trace_G3_Math_2026.md` | Small test of where each piece of five Grade 3 Math items can be found, to prepare for item acquisition. |
 | 📄 `raw_questions.csv` | Template for logging individual assessment items once extraction begins (question text, answer choices A-D, correct answer, reference text). Header only; no items extracted yet. |
 | 📘 `A3I_Javier_Onboarding_Packet_Draft_v1_1.docx` | Project overview, vocabulary/glossary, first-assignment brief, 100-hour fall work plan, working norms, and the draft technical architecture/data flow. Read this first. |
 | 🔗 `A3I_URL_Reference_PG.docx` | Authoritative TEA source links identified at the start of the pilot (STAAR Grade 3 RLA). The Record Keeper is now the maintained list of sources. |
-| 🗂️ `Converted_Data/` | _Not started yet._ Will hold the canonical, machine-readable item schema once the extraction layer (Phase 4) is built. |
+
 
 ## 🗃️ How the resource inventory works
 
@@ -51,7 +48,7 @@ The fall pilot covers Texas STAAR in three contexts: **Grade 3 RLA**, **Grade 3 
 Each row in `Record_Keeper` is one authoritative resource: a document, file, web page or test interface. Every field describes **that resource only**. A single test usually has several rows (test, answer key, rationales, scoring guide, blueprint).
 
 ### Inclusion rule
-A resource is included if it is published by the state agency or its official test vendor, and it describes, scores or delivers the assessment for an in-scope subject and grade or course. Open questions about Spanish versions and student reference materials are in *Things That Did Not Fit*.
+A resource is included if it is published by the state agency or its official test vendor, and it describes, scores or delivers the assessment for an in-scope subject and grade or course.
 
 ### Field conventions
 * 🔑 **Resource_ID** is our own ID (`TX-0001`, `TX-0002` ...), assigned once and never reused. Any ID the agency or platform assigns (e.g. Cambium's `testId`) goes in **Source_Assigned_ID**.
@@ -63,6 +60,11 @@ A resource is included if it is published by the state agency or its official te
 
   Each takes Y / N / Unknown.
 * 📝 **Item_Text_Coverage** (None / Partial / Full / Unknown) records how much item content the resource reproduces *as students see it*. Explanations or paraphrases of an item don't count, even if they quote a phrase. Partial means some items are reproduced in full and others not at all, and the **Notes** say which.
+  * *None*: no original question content is reproduced.
+  * *Partial*: some original question content is reproduced, but one or more questions covered by the resource lack a complete prompt, response options, or required visual content.
+  * *Full*: all questions covered by the resource include their complete prompts, response options where applicable, and required visual content.
+  * *Unknown*: not yet established. Explanations or inferred wording do not count as original question content.
+  
 * 📋 **Resource_Type**, **Subject**, **Access_Format**, **Technical_Barrier_Type** and **QA_Status** use dropdowns. The allowed values are listed in the Data_Dictionary (there is no separate Controlled_Vocabularies tab as of v0.4). Rubric (generic scoring criteria) and Scoring Guide (one administration's scored sample responses) are separate types.
 * ✍️ Titles are copied exactly as printed.
 * 📝 **Retrieval_Date** Retrieval_Date is the date the resource was last opened and confirmed at its URL, written as `YYYY-MM-DD`. 
@@ -74,7 +76,7 @@ They get **one row**, never duplicates.
 * To filter by grade or year in code, split the range on the hyphen.
 
 ### Recording uncertainty
-Values are never guessed. When something can't be confirmed from the source, the field is set to `Unknown` (or left blank where there is no Unknown option), and **Notes_Unresolved_Questions** explains why. **Technical_Barrier_Type** must agree with the notes. Problems with the structure itself go in *Things That Did Not Fit*.
+Values are never guessed. When something can't be confirmed from the source, the field is set to `Unknown` (or left blank where there is no Unknown option), and **Notes_Unresolved_Questions** explains why. **Technical_Barrier_Type** must agree with the notes.
 
 ### ✅ Claude-assisted Quality assurance
 Every row has a **QA_Status**:
@@ -88,11 +90,6 @@ Current pilot status: All 15 resources remain marked **Not Reviewed** for full r
 
 ## 🔗 How this connects to item acquisition
 The inventory is the map for Phases 3–4. It shows which resource supplies which piece of an item (prompt, options, figures, correct answer, points, standard, rationale, scoring) and which pieces exist only in the online test.
-
-The first trace (`Item_Source_Trace_G3_Math_2026.md`) found:
-* The downloadable PDFs are enough to rebuild technology-enhanced items (multiple select, drag and drop): the answer-key appendix reproduces them in full.
-* Multiple-choice question text, answer choices and figures appear only in the online test, so the online interface has to be one of the acquisition sources.
-* `raw_questions.csv` assumes answer choices A-D. It will need to be extended for multi-select, drag-and-drop and constructed-response items before extraction begins.
 
 ## 🛠️ Built with
 
@@ -116,7 +113,6 @@ A `requirements.txt` and environment setup steps will be added here once the acq
 * ✅ Log every official STAAR resource you find in `A3I_Record_Keeper_ver0.4.xlsx`, one row per resource, following the rules on the **Instructions** tab and the definitions on the **Data_Dictionary** tab.
 * 🔢 Give each new row the next unused `TX-####` ID and set QA_Status to **Not Reviewed** until it has been checked against the source.
 * ❓ Don't guess: use `Unknown` and explain in `Notes_Unresolved_Questions`, per the onboarding packet's provenance and "do not invent missing metadata" rules.
-* 🧩 If something doesn't fit the structure, log it in *Things That Did Not Fit*.
 * 🔄 When a field is added, renamed or removed, update the Data_Dictionary, Instructions, Update_Notes and this README together.
 * 🔜 Detailed local run instructions will be added once there is code to run (Phase 3+).
 
